@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Login from './Login/page'
 import "./globals.css";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
@@ -29,51 +30,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="pt-br">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <div className="flex h-screen">
-          {/* Sidebar fixo à esquerda */}
-          <Sidebar />
-
-          {/* Área principal com header + conteúdo */}
-          <div className="flex flex-col flex-1 bg-gray-100 overflow-hidden">
-            {/* Header no topo da área principal */}
-            <Header />
-            <div className="p-6">
-      <ProjectCard
-        title="Projeto #1"
-        members={[
-          "/avatars/user1.png",
-          "/avatars/user2.png",
-          "/avatars/user3.png",
-        ]}
-        extraCount={4}
-        color="bg-[#14E9DE]"
-      />
-       <div className="p-6">
-      <TaskCard title="Tarefa" description="Descrição" />
-    </div>
-    </div>
-
-            {/* Conteúdo da página abaixo do header */}
-            <main className="flex-1 overflow-y-auto p-6">
-              {children}
-            </main>
-          </div>
-        </div>
-        <div className="p-6 bg-gray-100 min-h-screen flex justify-center items-start">
-      <TaskColumn
-        title="Em progresso"
-        statusColor="bg-gray-400"
-        tasks={[
-          { title: "Tarefa", description: "Descrição" },
-          { title: "Tarefa", description: "Descrição" },
-          { title: "Tarefa", description: "Descrição" },
-          { title: "Tarefa", description: "Descrição" },
-          { title: "Tarefa", description: "Descrição" },
-        ]}
-      />
-    </div>
+               <Login/>
       </body>
     </html>
   );
