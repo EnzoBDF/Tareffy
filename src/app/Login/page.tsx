@@ -1,3 +1,6 @@
+'use client';
+
+import Link from 'next/link';
 import React from 'react';
 
 const Page = () => {
@@ -143,18 +146,20 @@ const Page = () => {
               />
             </div>
 
-            <button
-              type="submit"
-              className="
-                bg-[#2C2C32] text-white py-2 px-4 rounded-md shadow hover:bg-black transition
-                w-full
-                sm:text-sm
-                md:text-base
-                xl:w-[30vw]
-              "
-            >
-              Entrar
-            </button>
+          <Link href="/Gerente" 
+            className="
+            bg-[#2C2C32] text-white py-2 px-4 rounded-md shadow hover:bg-black transition
+            w-full
+            sm:text-sm
+            md:text-base
+            xl:w-[30vw]
+            flex justify-center
+            cursor-pointer
+            text-center
+            no-underline"
+          >
+            Entrar
+          </Link>
           </form>
         </div>
       </div>

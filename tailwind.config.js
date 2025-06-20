@@ -11,7 +11,10 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'Arial', 'Helvetica', 'sans-serif'],
+          sans: [ 'Arial', 'Helvetica', 'sans-serif'],
+          libre: ['"Libre Franklin"'],
+          inter: ['Inter', 'sans-serif'],  
+          k2d: ['K2D', 'sans-serif'],    
       },
     },
   },

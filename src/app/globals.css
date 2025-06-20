@@ -40,3 +40,20 @@ body {
   font-style: normal;
   font-display: swap;
 }
+
+
+@font-face{
+  font-family: "Libre Franklin", sans-serif;
+  src: url("/fonts/Libre-Franklin-bold.woff2") format("woff2");
+  font-optical-sizing: auto;
+  font-weight:bold;
+  font-style: normal;
+}
+
+
+@font-face{
+  font-family: "K2D", sans-serif format("woff2");
+  src: url("/fonts/K2D.woff2");
+  font-weight: bold;
+  font-style: normal;
+}

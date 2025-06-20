@@ -30,13 +30,13 @@ const Sidebar = () => {
   return (
     <aside className="w-56 min-h-screen bg-white p-6 shadow-md">
       <div className="mb-8">
-        <h1 className="text-xl font-bold">TAREFFY</h1>
+        <h1 className="text-xl text-[#2C2C32] font-bold">TAREFFY</h1>
       </div>
 
       <nav className="flex flex-col gap-4 text-sm">
         <SidebarItem href="/projetos" label="Projetos" active={pathname === '/projetos'} />
-        <SidebarItem href="/estoque" label="Estoque" active={pathname === '/estoque'} />
-        <SidebarItem href="/area-gerente" label="Área do gerente" active={pathname === '/area-gerente'} />
+        <SidebarItem href="/Estoque" label="Estoque" active={pathname === '/estoque'} />
+        <SidebarItem href="/Gerente" label="Área do gerente" active={pathname === '/gerente'} />
 
         <SidebarItem href="/filtro" label="Filtro de Tarefas" active={pathname === '/filtro'} />
       </nav>
