@@ -3,13 +3,12 @@ import Image from 'next/image';
 
 const Header = () => {
   return (
-    <header className="bg-[#1f1f1f] text-white border-2  rounded-md px-6 py-3 flex items-center justify-between w-full shadow-md">
+    <header className="bg-[#2C2C32] text-white border-b-2 px-6 py-3 flex items-center justify-between w-full shadow-md sticky top-0 z-50">
       {/* Esquerda: Logo + Avatares + ícone */}
       <div className="flex items-center gap-4">
         <h1 className="text-lg font-bold">TAREFFY</h1>
 
         <div className="flex -space-x-2">
-          {/* Substitua pelas imagens reais ou use avatar genérico */}
           <Image
             src="/avatars/avatar1.png"
             alt="Avatar 1"

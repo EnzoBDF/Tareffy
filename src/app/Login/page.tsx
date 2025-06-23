@@ -146,7 +146,7 @@ const Page = () => {
               />
             </div>
 
-          <Link href="/Gerente" 
+          <Link href="/gerente" 
             className="
             bg-[#2C2C32] text-white py-2 px-4 rounded-md shadow hover:bg-black transition
             w-full
