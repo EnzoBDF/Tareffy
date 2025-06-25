@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const Header = () => {
   return (
-    <header className="bg-[#2C2C32] text-white border-b-2 px-6 py-3 flex items-center justify-between w-full shadow-md sticky top-0 z-50">
+    <header className="bg-[#2C2C32] text-white px-6 py-3 flex items-center justify-between w-full shadow-md sticky top-0 z-50">
       {/* Esquerda: Logo + Avatares + ícone */}
       <div className="flex items-center gap-4">
         <h1 className="text-lg font-bold">TAREFFY</h1>

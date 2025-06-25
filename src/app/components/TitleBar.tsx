@@ -1,17 +1,13 @@
-import Button from '../components/Button';
-import { FaPlus, FaMinus } from "react-icons/fa";
-
-
-
+import { ReactNode } from "react";
 
 interface TitleBarProps {
   role?: string;
   name: string;
   subtitle?: string;
-  showButtons?: boolean;
+  rightContent?: ReactNode;
 }
 
-export default function TitleBar({ role, name, subtitle, showButtons = false }: TitleBarProps) {
+export default function TitleBar({ role, name, subtitle, rightContent }: TitleBarProps) {
   return (
     <div className="mt-10 mb-8 w-[79.167vw] h-[13.5vh] bg-[#2C2C32] p-[1vw] rounded-lg flex justify-between items-center">
       <div>
@@ -23,10 +19,9 @@ export default function TitleBar({ role, name, subtitle, showButtons = false }: 
         )}
       </div>
 
-      {showButtons && (
+      {rightContent && (
         <div className="flex gap-4">
-         <Button icon={<FaPlus />}>Cadastrar produto</Button>
-         <Button icon={<FaMinus />}>Excluir produto</Button>
+          {rightContent}
         </div>
       )}
     </div>

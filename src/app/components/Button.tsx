@@ -1,23 +1,30 @@
+"use client";
+
 import { ReactNode } from "react";
 
-interface CustomButtonProps {
+interface ButtonProps {
   children: ReactNode;
   icon?: ReactNode;
   onClick?: () => void;
+  type?: "button" | "submit" | "reset";
+  variant?: "primary" | "secondary" | "danger";
+  className?: string;
+  disabled?: boolean;
 }
 
-export default function Button({ children, icon, onClick }: CustomButtonProps) {
+export default function Button({ children, icon, onClick, type = "button", variant = "primary", className = "", disabled = false }: ButtonProps) {
+  const variants = {
+    primary: "bg-yellow-400 hover:bg-yellow-500 text-black font-semibold shadow-md px-5 py-2 rounded-md",
+    secondary: "bg-gray-300 hover:bg-gray-400 text-black font-semibold shadow-md px-5 py-2 rounded-md",
+    danger: "bg-red-500 hover:bg-red-600 text-white",
+  };
+
+  const variantClass = variants[variant];
+
   return (
-    <button
-      onClick={onClick}
-      className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold px-4 py-2 rounded-md shadow-md flex items-center gap-2"
-    >
-      {children}
-      {icon && (
-        <div className="bg-[#FFFFFF] rounded-full flex items-center justify-center p-1">
-            {icon}
-        </div>
-        )}
+    <button type={type} onClick={onClick} className={`flex items-center gap-2 ${variantClass} ${className}`} disabled={disabled}>
+      <span>{children}</span>
+      {icon && <span className="w-6 h-6 flex items-center justify-center bg-white text-black rounded-full text-sm">{icon}</span>}
     </button>
   );
 }
