@@ -1,44 +1,69 @@
 "use client";
 import { useState } from "react";
-import SearchBar from "./SearchBar";
+import Button from "./Button";
 
-type Produto={
-    id: String;
-    nome:String;
-    quantidade:number;
+type Produto = {
+  id: string;
+  nome: string;
+  tipo: string;
+  unidade: string;
+  quantidade: number;
 };
-interface ProductListProps{
-    produtos: Produto[];
-} 
-
-
-export default function ProductTable({produtos}:ProductListProps){
-        const [search, setSearch] = useState("");
-
-        const productFilter = produtos.filter((produto) =>(
-            produto.nome.toLowerCase().includes(search.toLowerCase()))
-        );
-        return (
-            <div className="bg-white rounded-lg shadow-md mt-4 overflow-auto">
-              <div className="bg-[#2c2c2c] text-white px-4 py-2 flex items-center gap-4">
-                <span className="font-bold text-yellow-400 w-1/3">Produto</span>
-                <div className="w-1/3">
-                  <SearchBar value={search} onChange={setSearch} placeholder="Pesquisar" />
-                </div>
-                <span className="font-bold text-yellow-400 w-1/6 text-center">ID</span>
-                <span className="font-bold text-yellow-400 w-1/6 text-center">Quantidade</span>
-              </div>
-        
-              <div className="max-h-[400px] overflow-y-auto divide-y">
-                {productFilter.map((produto, index) => (
-                  <div key={index} className="flex px-4 py-3 hover:bg-gray-100">
-                    <span className="w-1/3 text-black">{produto.nome}</span>
-                    <span className="w-1/3 text-center text-black">{produto.id}</span>
-                    <span className="w-1/3 text-center text-black">{produto.quantidade}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ); 
+interface ProductTableProps {
+  produtos: Produto[];
+  setProdutos: React.Dispatch<React.SetStateAction<Produto[]>>;
 }
 
+export default function ProductTable({ produtos, setProdutos }: ProductTableProps) {
+  const [search, setSearch] = useState("");
+
+  const handleQuantityChange = (id: string, value: number) => {
+    setProdutos((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, quantidade: value } : p))
+    );
+  };
+
+  const handleManualEdit = (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
+    const value = parseInt(e.target.value, 10);
+    if (!isNaN(value)) {
+      handleQuantityChange(id, value);
+    }
+  };
+
+  const productFilter = produtos.filter((produto) =>
+    produto.nome.toLowerCase().includes(search.toLowerCase())
+  );
+
+  return (
+    <div className="text-center bg-white rounded-lg shadow-md mt-4">
+      <div className="bg-[#2c2c2c] text-white px-4 py-2 flex items-center gap-4 text-sm font-bold">
+        <span className="text-yellow-400 w-1/5">Produto</span>
+        <span className="text-yellow-400 w-1/5">Tipo</span>
+        <span className="text-yellow-400 w-1/5">Unidade</span>
+        <span className="text-yellow-400 w-1/5">ID</span>
+        <span className="text-yellow-400 w-1/5">Qtd.</span>
+      </div>
+
+      <div className="max-h-150 overflow-y-auto divide-y scroll-stable">
+        {productFilter.map((produto) => (
+          <div key={produto.id} className="flex px-4 py-3 items-center hover:bg-gray-100 text-black text-sm">
+            <span className="w-1/5">{produto.nome}</span>
+            <span className="w-1/5">{produto.tipo}</span>
+            <span className="w-1/5">{produto.unidade}</span>
+            <span className="w-1/5 pl-5">{produto.id}</span>
+            <div className="w-1/5 flex items-center justify-center gap-2 pl-10">
+              <Button variant="circle" onClick={()=>handleQuantityChange(produto.id, produto.quantidade -1)}>-</Button>
+              <input
+                type="text"
+                value={produto.quantidade}
+                onChange={(e) => handleManualEdit(e, produto.id)}
+                className="w-14 text-center border border-gray-300 rounded "
+              />
+              <Button variant="circle" onClick={() => handleQuantityChange(produto.id, produto.quantidade + 1)}>+</Button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}

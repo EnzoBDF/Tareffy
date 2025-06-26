@@ -8,27 +8,47 @@ import { FaPlus, FaMinus } from "react-icons/fa";
 import ProductTable from "../components/ProductTable";
 import AddProductModal from "../components/AddProductModal";
 import DeleteProductModal from "../components/DeleteProductModal";
+interface Product {
+  id: string;
+  nome: string;
+  tipo: string;
+  unidade: string;
+  quantidade: number;
+}
 
-const Teste = Array.from({ length: 10 }).map((_, i) => ({
-  id: `#99${i}`,
-  nome: "Nome do Produto",
-  quantidade: 100,
-}));
 
 export default function Estoque() {
+  const [products, setProducts] = useState<Product[]>(
+  Array.from({ length: 10 }).map((_, i) => ({
+    id: `#99${i}`,
+    nome: "Nome do Produto",
+    tipo: "Padrão",
+    unidade: "un",
+    quantidade: 0,
+  }))
+);
+
+
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(Teste[0]); // Exemplo fixo
 
   const handleAddProduct = (data: { nome: string; tipo: string; unidade: string }) => {
-    console.log("Produto cadastrado:", data);
-    // Aqui você pode adicionar no backend ou no estado
+    const novoProduto: Product = {
+      id: `#${Math.floor(Math.random() * 10000)}`, // talvez usar UUID?
+      nome: data.nome,
+      tipo: data.tipo,
+      unidade: data.unidade,
+      quantidade: 0 
+    };
+  
+    setProducts((prev) => [...prev, novoProduto]);
+    setIsAddModalOpen(false);
   };
+  
 
-  const handleDeleteProduct = () => {
-    console.log("Produto deletado:", selectedProduct);
+  const handleDeleteProduct = (id: string) => {
+    setProducts((prev) => prev.filter((p) => p.id !== id));
     setIsDeleteModalOpen(false);
-    // Aqui você pode remover do estado ou chamar backend
   };
 
   return (
@@ -49,7 +69,7 @@ export default function Estoque() {
             </>
           }
         />
-        <ProductTable produtos={Teste} />
+        <ProductTable produtos={products} setProdutos={setProducts} />
       </HeaderWithSidebar>
 
       <AddProductModal
@@ -62,8 +82,7 @@ export default function Estoque() {
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
         onDelete={handleDeleteProduct}
-        productName={selectedProduct.nome}
-        productId={selectedProduct.id}
+        products={products}
       />
     </div>
   );
