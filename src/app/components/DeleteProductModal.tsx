@@ -15,8 +15,8 @@ export default function DeleteProductModal({isOpen, onClose, onDelete, productNa
     
     
     return(
-        <Modal isOpen={isOpen} onClose={onClose} containerClassName="w-100 p-0 bg-transparent shadow-none">
-            <div className="text-xl font-bold text-[#FFCB05] bg-[#2C2C32] rounded-t-xl -mt-6 -mx-6 px-6 py-3">
+        <Modal isOpen={isOpen} onClose={onClose} containerClassName="w-120 p-0 bg-transparent shadow-none rounded-b-[0.6rem]">
+            <div className="bg-[#2c2c2c] text-yellow-400 font-bold px-4 py-4 rounded-t-[0.6rem] ">
                 Excluir
             </div>
             <ModalDeleteForm productName={productName} productId={productId} onDelete={onDelete} onClose={onClose}/>

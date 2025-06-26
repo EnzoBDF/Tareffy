@@ -19,9 +19,9 @@ export default function ModalProductForm({ onSubmit, onClose }: ModalProductForm
   };
 
   return (
-    <div className="w-200 rounded shadow-lg overflow-hidden">
+    <div className="w-200 rounded-b-[0.6rem] shadow-lg overflow-hidden bg-white">
         
-        <form onSubmit={handleSubmit} className="bg-white px-6 py-5 space-y-4 rounded-b-[0.6rem]">
+        <form onSubmit={handleSubmit} className=" px-6 py-5 space-y-4">
         <div className="grid grid-cols-3 gap-4 justify-items-center">
           <div className="col-span-2">
             <label className="block text-sm font-semibold mb-1 text-black">Nome do produto</label>
