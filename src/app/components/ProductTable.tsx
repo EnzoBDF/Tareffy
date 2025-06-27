@@ -35,8 +35,8 @@ export default function ProductTable({ produtos, setProdutos }: ProductTableProp
   );
 
   return (
-    <div className="text-center bg-white rounded-lg shadow-md mt-4">
-      <div className="bg-[#2c2c2c] text-white px-4 py-2 flex items-center gap-4 text-sm font-bold">
+    <div className="text-center bg-white rounded-lg shadow-md mt-4 ">
+      <div className="bg-[#2c2c2c] px-4 py-5 flex items-center gap-4 text-sm font-bold rounded-t-lg">
         <span className="text-yellow-400 w-1/5">Produto</span>
         <span className="text-yellow-400 w-1/5">Tipo</span>
         <span className="text-yellow-400 w-1/5">Unidade</span>

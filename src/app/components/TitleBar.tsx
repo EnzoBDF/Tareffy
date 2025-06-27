@@ -9,7 +9,7 @@ interface TitleBarProps {
 
 export default function TitleBar({ role, name, subtitle, rightContent }: TitleBarProps) {
   return (
-    <div className="mt-10 mb-8 w-[79.167vw] h-[13.5vh] bg-[#2C2C32] p-[1vw] rounded-lg flex justify-between items-center">
+    <div className="mt-8 mb-8 w-[79.167vw] h-[13.5vh] bg-[#2C2C32] p-[1vw] rounded-lg flex justify-between items-center">
       <div>
         <h2 className="text-[2.25rem] font-regular text-white">
           Olá {role && <span className="capitalize">{role}</span>} <span className="font-bold">{name}</span>!
