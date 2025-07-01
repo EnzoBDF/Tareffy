@@ -14,10 +14,10 @@ const ProjectCard = ({
   color = "bg-blue-400",
 }: ProjectCardProps) => {
   return (
-    <div className="flex rounded-lg overflow-hidden shadow-md w-[260px] h-[120px]">
+    <div className="flex rounded-xl overflow-hidden shadow-md w-[30rem] h-48 bg-[#2C2C32] items-center justify-center">
       
-      <div className="bg-[#1f1f1f] text-white flex-1 p-4 flex flex-col justify-between">
-        <h2 className="text-lg font-bold">{title}</h2>
+      <div className=" text-white flex-1 p-4 flex flex-col justify-between m-5">
+        <h2 className="text-2xl font-bold">{title}</h2>
         <div className="flex items-center -space-x-2">
           {members.slice(0, 3).map((src, index) => (
             <Image
@@ -37,7 +37,7 @@ const ProjectCard = ({
         </div>
       </div>
 
-      <div className={`w-14 ${color}`} />
+      <div className={`w-28 ${color} h-screen`} />
     </div>
   );
 };
