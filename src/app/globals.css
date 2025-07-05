@@ -57,3 +57,7 @@ body {
   font-weight: bold;
   font-style: normal;
 }
+
+.scroll-stable {
+  scrollbar-gutter: stable;
+}
