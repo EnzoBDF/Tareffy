@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import React from 'react'
 const icons = [
-  { img: "icon.svg", name: "Funcionários", link: "/Funcionario" },
+  { img: "icon.svg", name: "Funcionários", link: "/funcionario" },
   { img: "icon1.svg", name: "Relatórios", link: "/relatorios" },
   { img: "icon2.svg", name: "Clientes", link: "/clientes" },
-  { img: "icon3.svg", name:"Estoque", link:"/Estoque"},
+  { img: "icon3.svg", name:"Estoque", link:"/estoque"},
   { img: "icon4.svg", name:"Gerar Relatorio", link:""},
   { img: "icon5.svg", name:"Gerar Relatorio", link:""}
 ];

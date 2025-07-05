@@ -35,7 +35,6 @@ const Sidebar = () => {
 
       <nav className="flex flex-col gap-4 text-sm">
         <SidebarItem href="/projetos" label="Projetos" active={pathname === '/projetos'} />
-        <SidebarItem href="/estoque" label="Estoque" active={pathname === '/estoque'} />
         <SidebarItem href="/gerente" label="Área do gerente" active={pathname === '/gerente'} />
         <SidebarItem href="/filtro" label="Filtro de Tarefas" active={pathname === '/filtro'} />
       </nav>
