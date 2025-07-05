@@ -1,11 +1,14 @@
+"use client";
+import React, { useState, useEffect, use } from "react";
 import HeaderWithSidebar from "../../components/HeaderWithSidebar";
 import TitleBar from "../../components/TitleBar";
 import TaskColumn from "../../components/TaskColumn";
 import { title } from "process";
 import Button from "@/app/components/Button";
 import { FaPlug, FaPlus } from "react-icons/fa";
+import TaskModal from "../../components/TaskModal";
 
-// Simulação de dados de 6 projetos, cada um com suas próprias tarefas
+
 const projetos = [
   {
     id: "1",
@@ -78,27 +81,81 @@ const projetos = [
   },
 ];
 
-export default function ProjectPage({ params }: { params: { id: string } }) {
-  const { id } = params;
+export default function ProjectPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
 
-  // Busca os dados do projeto
+
   const projeto = projetos.find((p) => p.id === id) || projetos[0];
 
-  // Filtra tarefas do projeto por status
-  const tarefasTodo = projeto.tarefas.filter((t) => t.status === "todo");
-  const tarefasDoing = projeto.tarefas.filter((t) => t.status === "doing");
-  const tarefasDone = projeto.tarefas.filter((t) => t.status === "done");
+  const [tarefas, setTarefas] = useState(projeto.tarefas);
+  useEffect(() => {
+    const saved = localStorage.getItem(`tarefas_projeto_${id}`);
+    if (saved) {
+      try {
+        setTarefas(JSON.parse(saved));
+      } catch {}
+    }
+  }, [id]);
+
+
+  useEffect(() => {
+    localStorage.setItem(`tarefas_projeto_${id}`, JSON.stringify(tarefas));
+  }, [tarefas, id]);
+
+  const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
+  const [taskToEdit, setTaskToEdit] = useState(null);
+
+
+  const tarefasTodo = tarefas.filter((t) => t.status === "todo");
+  const tarefasDoing = tarefas.filter((t) => t.status === "doing");
+  const tarefasDone = tarefas.filter((t) => t.status === "done");
+
+
+  const handleOpenCreateTask = () => {
+    setTaskToEdit({ title: "", description: "", status: "todo" });
+    setIsTaskModalOpen(true);
+  };
+
+  const handleSaveTask = (task) => {
+    if (!task.id) {
+      const newTask = { ...task, id: Date.now() };
+      setTarefas((prev) => [newTask, ...prev]);
+    } else {
+      // Atualiza tarefa existente
+      setTarefas((prev) => prev.map((t) => t.id === task.id ? { ...t, ...task } : t));
+    }
+    setIsTaskModalOpen(false);
+    setTaskToEdit(null);
+  };
+
+  const handleDeleteTask = (task) => {
+    setTarefas((prev) => prev.filter((t) => t.id !== task.id));
+    setIsTaskModalOpen(false);
+    setTaskToEdit(null);
+  };
+
+
+  const handleCloseModal = () => {
+    setIsTaskModalOpen(false);
+    setTaskToEdit(null);
+  };
+
+ 
+  const handleMoveStatus = (task, newStatus) => {
+    setTarefas((prev) => prev.map((t) => t.id === task.id ? { ...t, status: newStatus } : t));
+  };
 
   return (
     <HeaderWithSidebar>
       <TitleBar name={`Olá Gerente ${projeto.gerente}!`} role={projeto.title} rightContent={
-        <Button variant="primary" icon={<FaPlus/>}>Criar Tarefa</Button>
+        <Button variant="primary" icon={<FaPlus/>} onClick={handleOpenCreateTask}>Criar Tarefa</Button>
       } subtitle={`Projeto #${projeto.id}`} />
       <div className="flex  mt-8 justify-around justify-items-center">
-        <TaskColumn title="A fazer" statusColor="bg-red-400" tasks={tarefasTodo} />
-        <TaskColumn title="Em progresso" statusColor="bg-yellow-400" tasks={tarefasDoing} />
-        <TaskColumn title="Concluído" statusColor="bg-green-400" tasks={tarefasDone} />
+        <TaskColumn title="A fazer" statusColor="bg-red-400" tasks={tarefasTodo} onDeleteTask={handleDeleteTask} onSaveTask={handleSaveTask} />
+        <TaskColumn title="Em progresso" statusColor="bg-yellow-400" tasks={tarefasDoing} onDeleteTask={handleDeleteTask} onSaveTask={handleSaveTask} />
+        <TaskColumn title="Concluído" statusColor="bg-green-400" tasks={tarefasDone} onDeleteTask={handleDeleteTask} onSaveTask={handleSaveTask} />
       </div>
+      <TaskModal open={isTaskModalOpen} onClose={handleCloseModal} task={taskToEdit} onSave={handleSaveTask} onDelete={handleDeleteTask} onMoveStatus={handleMoveStatus} />
     </HeaderWithSidebar>
   );
 }

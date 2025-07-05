@@ -14,9 +14,11 @@ interface TaskColumnProps {
   title: string;
   tasks: Task[];
   statusColor?: string;
+  onDeleteTask?: (task: Task) => void;
+  onSaveTask?: (task: Task) => void;
 }
 
-const TaskColumn = ({ title, tasks, statusColor = "bg-gray-300" }: TaskColumnProps) => {
+const TaskColumn = ({ title, tasks, statusColor = "bg-gray-300", onDeleteTask, onSaveTask }: TaskColumnProps) => {
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -58,7 +60,7 @@ const TaskColumn = ({ title, tasks, statusColor = "bg-gray-300" }: TaskColumnPro
           </div>
         ))}
       </div>
-      <TaskModal open={modalOpen} onClose={handleCloseModal} task={selectedTask}  />
+      <TaskModal open={modalOpen} onClose={handleCloseModal} task={selectedTask} onDelete={onDeleteTask} onSave={onSaveTask} />
     </div>
   );
 };

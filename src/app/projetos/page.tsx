@@ -13,7 +13,7 @@ import { useState } from "react"
 export default function Projetos() {
     const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
 
-    // Defina o array aqui:
+
     const projetos = [
         { id: 1, title: "Projeto #1", members: ["/public/icon1.svg", "/public/icon2.svg"] },
         { id: 2, title: "Projeto #2", members: ["/public/icon3.svg", "/public/icon4.svg"] },

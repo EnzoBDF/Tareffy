@@ -1,10 +1,11 @@
 "use client"
 
-// src/app/components/ProjectModal.tsx
 import React, { useState } from "react";
 import { FaCalendar, FaCheckSquare, FaClipboard, FaEnvelopeOpenText, FaPaperclip, FaTextHeight, FaUsers } from "react-icons/fa";
 import EmployeeAvatar from "./EmployeeAvatar";
 import Button from "./Button";
+
+
 
 const employeesMock = [
   { id: 1, name: "Marcela T.", avatar: "/public/icon1.svg" },
@@ -96,7 +97,7 @@ export default function ProjectModal({ isOpen, onClose, onSave }) {
               <button
                 type="button"
                 className="absolute bottom-[-4%] right-[-3%] w-12 h-12 rounded-full bg-yellow-400 text-3xl flex items-center justify-center shadow-xl hover:bg-yellow-500 transition text-black"
-                onClick={() => {/* ação de adicionar funcionário */}}
+                onClick={() => {}}
               >
                 +
               </button>
